@@ -287,5 +287,4 @@ for i_episode in range(NUM_MODEL):
             
     replay[state] = reward
     #Q = update_Q(Q, state, 100, 0.01, 1)  
-
-save_obj(replay, 'replay_500')
+save_obj(replay, 'replay_' + str(np.random.randint(1000)))
