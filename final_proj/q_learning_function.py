@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 import itertools
 from cs231n.data_utils import load_CIFAR10
 
-MAX_LAYER = 10
+MAX_LAYER = 5
 NUM_ACTION = 16
-NUM_MODEL = 500
+NUM_MODEL = 100
 
 # Action space 
 def get_action_space():
@@ -47,7 +47,7 @@ def get_action_space():
 
 action_space = get_action_space()
 
-def get_CIFAR10_data(num_training=20000, num_validation=1000, num_test=5000):
+def get_CIFAR10_data(num_training=10000, num_validation=500, num_test=500):
     """
     Load the CIFAR-10 dataset from disk and perform preprocessing to prepare
     it for the two-layer neural net classifier. These are the same steps as
@@ -285,6 +285,6 @@ for i_episode in range(NUM_MODEL):
             print('Testing')
             _, reward = run_model(sess,y_out,mean_loss,X_test,y_test,1, 64, verbose=True)
             
-    replay[state] = reward
+    replay[state] = (reward, accuracy)
     #Q = update_Q(Q, state, 100, 0.01, 1)  
 save_obj(replay, 'replay_' + str(np.random.randint(1000)))
